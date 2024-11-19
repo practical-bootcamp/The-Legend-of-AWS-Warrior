@@ -4,7 +4,7 @@ const path = require("node:path");
 const getCloudFormationOuputValue = (key) => {
   const command = `
     aws cloudformation describe-stacks \
-        --stack-name CloudProjectMarker \
+        --stack-name CloudProjectMarkerTest \
         --region us-east-1 \
         --no-paginate \
         --no-cli-pager \

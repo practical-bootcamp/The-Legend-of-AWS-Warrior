@@ -19,11 +19,11 @@ Parameters:
   ScheduleExpression:
     Type: String
     Description: Schedule Expression
-    Default: cron(0 * * * ? *)
+    Default: cron(0/5 * * * ? *)
     AllowedValues:
-      - cron(0/5 * * * ? *)
-      - cron(0 * * * ? *)
-      - cron(0 0 * * ? *)
+      - cron(0/5 * * * ? *) # every 5 minutes
+      - cron(0 * * * ? *) # every hour
+      - cron(0 0 * * ? *) # every day
 
 Conditions:
   isEnableScheduleGrader: !Equals [ !Ref ScheduleGrader, enable ]

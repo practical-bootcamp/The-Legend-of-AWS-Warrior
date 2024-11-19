@@ -4,7 +4,7 @@ if [ -z "$SecretHash" ]; then
     exit 1
 fi
 
-sam build && sam deploy --parameter-overrides "SecretHash=$SecretHash"
+sam build && sam deploy --parameter-overrides "SecretHash=b14ca5898a4e4133bbce2ea2315a4321"
 
 WebApiEndpoint=$(aws cloudformation describe-stacks \
     --stack-name CloudProjectMarkerTest \
