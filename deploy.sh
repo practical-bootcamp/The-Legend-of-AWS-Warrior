@@ -7,7 +7,7 @@ fi
 sam build && sam deploy --parameter-overrides "SecretHash=$SecretHash"
 
 WebApiEndpoint=$(aws cloudformation describe-stacks \
-    --stack-name CloudProjectMarker \
+    --stack-name CloudProjectMarkerTest \
     --region us-east-1 \
     --no-paginate \
     --no-cli-pager \

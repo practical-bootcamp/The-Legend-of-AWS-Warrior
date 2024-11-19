@@ -14,7 +14,7 @@ Parameters:
       - enable
       - disable
     Description: Enable Schedule Grader
-    Default: disable
+    Default: enable
 
   ScheduleExpression:
     Type: String
@@ -194,7 +194,7 @@ Resources:
     Properties:
       ApiStages:
         - ApiId: !Ref ApiGatewayApi
-          Stage: Prod
+          Stage: !Ref ApiGatewayApi.Stage
       Description: To usage plan and api key in REST API.
       Quota:
         Limit: 2880
@@ -290,37 +290,37 @@ Resources:
           Auth:
             ApiKeyRequired: true
 
-  GraderFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: ./src/ServerlessAPI
-      Handler: ServerlessAPI::ServerlessAPI.Functions.GraderFunction::FunctionHandler
-      Policies:
-        - S3CrudPolicy:
-            BucketName: !Ref TestResultBucket
-        - DynamoDBCrudPolicy:
-            TableName: !Ref PassedTestTable
-        - DynamoDBCrudPolicy:
-            TableName: !Ref FailedTestTable
-        - DynamoDBCrudPolicy:
-            TableName: !Ref AwsAccountTable
-      Environment:
-        Variables:
-          TEST_RESULT_Bucket: !Ref TestResultBucket
-          PASSED_TEST_TABLE: !Ref PassedTestTable
-          FAILED_TEST_TABLE: !Ref FailedTestTable
-          AWS_ACCOUNT_TABLE: !Ref AwsAccountTable
-          SECRET_HASH: !Ref SecretHash 
-      Events:
-        ApiEvent:
-          Type: Api
-          Properties:
-            Path: /grader
-            Method: GET
-            RestApiId:
-              Ref: ApiGatewayApi
-          Auth:
-            ApiKeyRequired: true
+  # GraderFunction:
+  #   Type: AWS::Serverless::Function
+  #   Properties:
+  #     CodeUri: ./src/ServerlessAPI
+  #     Handler: ServerlessAPI::ServerlessAPI.Functions.GraderFunction::FunctionHandler
+  #     Policies:
+  #       - S3CrudPolicy:
+  #           BucketName: !Ref TestResultBucket
+  #       - DynamoDBCrudPolicy:
+  #           TableName: !Ref PassedTestTable
+  #       - DynamoDBCrudPolicy:
+  #           TableName: !Ref FailedTestTable
+  #       - DynamoDBCrudPolicy:
+  #           TableName: !Ref AwsAccountTable
+  #     Environment:
+  #       Variables:
+  #         TEST_RESULT_Bucket: !Ref TestResultBucket
+  #         PASSED_TEST_TABLE: !Ref PassedTestTable
+  #         FAILED_TEST_TABLE: !Ref FailedTestTable
+  #         AWS_ACCOUNT_TABLE: !Ref AwsAccountTable
+  #         SECRET_HASH: !Ref SecretHash 
+  #     Events:
+  #       ApiEvent:
+  #         Type: Api
+  #         Properties:
+  #           Path: /grader
+  #           Method: GET
+  #           RestApiId:
+  #             Ref: ApiGatewayApi
+  #         Auth:
+  #           ApiKeyRequired: true
 
   GetPassedTestFunction:
     Type: AWS::Serverless::Function

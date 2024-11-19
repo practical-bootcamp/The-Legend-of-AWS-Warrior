@@ -60,9 +60,9 @@ class Marks extends Component {
     return (
       <div>
         <h2>Your Marks</h2>
-        <Button variant="outline-primary" onClick={this.handleButtonClick}>
+        {/* <Button variant="outline-primary" onClick={this.handleButtonClick}>
           Play "The Legend of AWS Warrior" Now!
-        </Button>
+        </Button> */}
         {theLastFailedTest && (
           <>
             <h3>The Last Failed Test</h3>
