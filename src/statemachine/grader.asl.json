@@ -13,7 +13,7 @@
       "Type": "Task",
       "Next": "Map",
       "Parameters": {
-        "TableName": "CloudProjectMarker-AwsAccountTable-160W5ZEFD9QSA",
+        "TableName": "${AWS_ACCOUNT_TABLE}",
         "ProjectionExpression": "#User",
         "ExpressionAttributeNames": {
           "#User": "User"
